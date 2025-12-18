@@ -19,11 +19,15 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("Không tìm thấy người dùng"));
 
         String role;
-        switch (user.getRole()) {
-            case 1 -> role = "ADMIN"; // sẽ thành ROLE_ADMIN tự động
-            case 2 -> role = "STAFF"; // sẽ thành ROLE_STAFF tự động
-            case 3 -> role = "USER";  // thêm case 3 cho USER
-            default -> throw new RuntimeException("Vai trò không hợp lệ");
+        Integer userRole = user.getRole();
+        if (userRole != null && userRole == 1) {
+            role = "ADMIN"; // sẽ thành ROLE_ADMIN tự động
+        } else if (userRole != null && userRole == 2) {
+            role = "STAFF"; // sẽ thành ROLE_STAFF tự động
+        } else if (userRole != null && userRole == 3) {
+            role = "USER";  // thêm case 3 cho USER
+        } else {
+            throw new RuntimeException("Vai trò không hợp lệ");
         }
 
         return org.springframework.security.core.userdetails.User
@@ -33,5 +37,4 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .build();
     }
 }
-
 
