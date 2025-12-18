@@ -27,6 +27,7 @@ Dự án này là phần backend Spring Boot cho ứng dụng bán giày sneaker
   - JDBC: `jdbc:sqlserver://localhost:1433;databaseName=DuAnTotNghiep_2;encrypt=true;trustServerCertificate=true;`
   - User: `sa`
   - Password: `123456`
+- Tự tạo bảng khi chạy lần đầu: thuộc tính `spring.jpa.hibernate.ddl-auto=update` đang bật sẵn để Hibernate tự sinh/migrate bảng theo entity. Nếu muốn giữ nguyên schema có sẵn, đặt lại thành `none` thông qua biến môi trường `SPRING_JPA_HIBERNATE_DDL_AUTO=none`.
 - Điều chỉnh cho môi trường của bạn bằng cách:
   - Chỉnh sửa trực tiếp trong `application.properties`, **hoặc**
   - Ghi đè qua biến môi trường/`-D` khi chạy Maven, ví dụ:
