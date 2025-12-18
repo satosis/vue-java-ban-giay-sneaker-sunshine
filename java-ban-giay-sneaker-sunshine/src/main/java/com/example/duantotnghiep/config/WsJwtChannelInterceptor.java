@@ -63,8 +63,10 @@ public class WsJwtChannelInterceptor implements ChannelInterceptor {
                         // Fallback DB nếu cần
                         if (customerId == null) {
                             customerId = userRepository.findByUsername(username)
-                                    .map(User::getCustomer)
-                                    .map(Customer::getId)
+                                    .map(user -> {
+                                        Customer customer = user.getCustomer();
+                                        return customer != null ? customer.getId() : null;
+                                    })
                                     .orElse(null);
                         }
 
@@ -99,4 +101,3 @@ public class WsJwtChannelInterceptor implements ChannelInterceptor {
         return message;
     }
 }
-
